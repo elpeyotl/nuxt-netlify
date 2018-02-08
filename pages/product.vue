@@ -6,6 +6,7 @@
       <h2 class="subtitle">
         Trying out implementing Netlify CMS into NUXT
       </h2>
+      <nuxt-link to="/">Home</nuxt-link>
       <div class="links">
         <a
           href="https://nuxtjs.org/"
