@@ -2,8 +2,7 @@
   <section class="container">
     <div>
       <app-logo/>
-      <h1 class="title">
-PROD      </h1>
+      <h1 class="title">PROD</h1>
       <h2 class="subtitle">
         Trying out implementing Netlify CMS into NUXT
       </h2>

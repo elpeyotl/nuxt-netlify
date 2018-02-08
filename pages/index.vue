@@ -6,10 +6,11 @@
         nuxt-with-netlify
       </h1>
       <h2 class="subtitle">
-        Trying out implementing Netlify CMS into NUXT
+        Home
       </h2>
+      <nuxt-link to="product">TEST</nuxt-link>
 
-              <nuxt-link to="product">TEST</nuxt-link>
+      <pre>{{ content.welcomemessage[0].text }}</pre>
 
       <div class="links">
 
@@ -29,19 +30,24 @@
 <script>
 import AppLogo from '~/components/AppLogo.vue'
 var Prismic = require('prismic-javascript');
+var PrismicDOM = require('prismic-dom');
 var apiEndpoint = "https://peyotedesign.prismic.io/api/v2";
 
-Prismic.getApi(apiEndpoint, {  }).then(function(api) {
-  return api.query(""); // An empty query will return all the documents
-}).then(function(response) {
-  console.log("Documents: ", response.results);
-}, function(err) {
-  console.log("Something went wrong: ", err);
-});
-
 export default {
+  async asyncData() {
+    const api = await Prismic.getApi(apiEndpoint);
+    const data = await api.query(
+          Prismic.Predicates.at('document.type', 'homepage'),
+    );
+    //attach the match to the content
+    const content = data.results[0].data;
+    return { content };
+  },
   components: {
     AppLogo
+  },
+  methods: {
+
   }
 }
 </script>
