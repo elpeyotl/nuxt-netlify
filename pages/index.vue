@@ -1,16 +1,13 @@
 <template>
   <section class="container">
     <div>
-      <app-logo/>
-      <h1 class="title">
-        nuxt-with-netlify
-      </h1>
-      <h2 class="subtitle">
-        Home
-      </h2>
+      <div>
+        <div v-html="PrismicDOM.RichText.asText(content.welcomemessage, linkResolver)" />
+
+      </div>
       <nuxt-link to="product">TEST</nuxt-link>
 
-      <pre>{{ content.welcomemessage[0].text }}</pre>
+      <pre>{{ content.welcomemessage }}</pre>
 
       <div class="links">
 
@@ -45,6 +42,18 @@ export default {
   },
   components: {
     AppLogo
+  },
+  data() {
+    return {
+      PrismicDOM,
+      linkResolver (doc) {
+        console.log(doc)
+        if (doc.type === 'product') {
+            return '/product/' + doc.uid;
+        }
+        return '/';
+      }
+    }
   },
   methods: {
 
